@@ -31,6 +31,6 @@ const countOccurrence = (arr, target) => {
     return count;
 };
 
-const arr = [1, 1, 1, 1, 1, 2, 3, 4, 4, 4, 4, 4, 5, 5, 6, 7, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10];
+const arr = [1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 9, 9, 10, 10, 10];
 const target = 9;
 console.log(countOccurrence(arr, target));
