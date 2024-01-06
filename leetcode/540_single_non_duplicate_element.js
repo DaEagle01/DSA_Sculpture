@@ -13,14 +13,8 @@ const singleNonDuplicate = (arr) => {
         if (arr[mid] !== arr[mid + 1] && arr[mid] !== arr[mid - 1]) {
             return arr[mid];
         }
-        else if (arr[mid] !== arr[mid + 1] && isEven) {
+        else if ((arr[mid] !== arr[mid + 1] && isEven) || (arr[mid] === arr[mid + 1] && !isEven)) {
             start = mid + 1;
-        }
-        else if (arr[mid] === arr[mid + 1] && !isEven) {
-            start = mid + 1;
-        }
-        else if (arr[mid] !== arr[mid - 1] && isEven) {
-            end = mid - 1
         }
         else {
             end = mid - 1
