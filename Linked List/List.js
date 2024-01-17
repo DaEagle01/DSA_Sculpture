@@ -11,17 +11,28 @@ class LinkedList {
         this.head = this.tail = node;
         this.length = 1;
     }
-    insert(value) {
+    append(value) {
         let node = new Node(value);
         this.tail.next = node;
         this.tail = node;
         this.length++;
     }
+
+    prepend(value) {
+        let node = new Node(value);
+        node.next = this.head;
+        this.head = node;
+        this.length++;
+    }
+
+    appendAtAnyPosition(value, position) {
+
+    }
 };
 
 const list = new LinkedList(10);
-list.insert(20);
-list.insert(30);
-list.insert(40);
-list.insert(50);
+list.append(20);
+list.prepend(5);
+list.append(30);
+list.appendAtAnyPosition(50, 3);
 console.log(list);
