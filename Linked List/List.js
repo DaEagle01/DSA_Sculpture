@@ -51,13 +51,39 @@ class LinkedList {
         }
         return node;
     }
+
+    print() {
+        let node = this.head;
+        while (node) {
+            console.log(node.value);
+            node = node.next;
+        }
+    }
+
+    update(value, position) {
+        let node = this.findNode(position);
+        node.value = value;
+    }
+
+    delete(position) {
+        if (position === 1) {
+            let currentNode = this.findNode(position);
+            this.head = currentNode.next;
+            currentNode.next = null;
+        } else {
+            let prevNode = this.findNode(position - 1);
+            prevNode.next = prevNode.next.next;
+        }
+        this.length--;
+    }
 };
 
 const list = new LinkedList(10);
-list.append(20);
 list.prepend(5);
+list.append(20);
 list.append(30);
 list.append(40);
 list.appendAtAnyPosition(50, 6);
-list.appendAtAnyPosition(150, 1);
+list.delete(1);
+list.print();
 console.log(list);
