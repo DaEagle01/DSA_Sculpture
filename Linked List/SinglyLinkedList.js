@@ -70,12 +70,18 @@ class LinkedList {
             let currentNode = this.findNode(position);
             this.head = currentNode.next;
             currentNode.next = null;
-        } else {
+        } else if (position === this.length) {
+            let prevNode = this.findNode(position - 1);
+            prevNode.next = null;
+        } else if (position > 1 && position < this.length) {
             let prevNode = this.findNode(position - 1);
             prevNode.next = prevNode.next.next;
+        } else {
+            throw new Error('Invalid position');
         }
         this.length--;
     }
+
 };
 
 const list = new LinkedList(10);
