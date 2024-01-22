@@ -127,7 +127,7 @@ class LinkedList {
 
     firstAndLastOccurrenceIndex(value) {
         let index = 0;
-        let occurrence = [undefined, undefined];
+        let occurrence = [0, 0];
         let node = this.head;
         while (node) {
             index++;
@@ -142,6 +142,42 @@ class LinkedList {
         };
         return occurrence;
     }
+
+    covertToArray() {
+        let array = [];
+        let node = this.head;
+        while (node) {
+            array.push(node.value);
+            node = node.next;
+        }
+        return array;
+    }
+
+    findMidValue() {
+        let a = this.head;
+        let b = this.head;
+        while (b?.next) {
+            a = a?.next;
+            b = b?.next?.next;
+        };
+        return a.value;
+    }
+
+    doesCircleExist() {
+        let a = this.head;
+        let b = this.head;
+        while (b) {
+            a = a?.next;
+            b = b?.next?.next;
+            if (a === b) return true;
+        };
+        return false;
+    }
+
+    deleteSingleNode(node) {
+        node = node.next;
+        node.next = node.next.next;
+    }
 };
 
 const list = new LinkedList(10);
@@ -152,13 +188,16 @@ list.append(40);
 list.appendAtAnyPosition(50, 6);
 list.append(60);
 list.append(70);
-list.append(43);
-list.append(65);
+list.append(73);
+list.append(80);
 // list.delete(1);
-list.print();
+// list.print();
 
 // console.log(list.sum());
 // console.log(list.findValue(30))
-console.log(list.firstAndLastOccurrenceIndex(50))
+// console.log(list.firstAndLastOccurrenceIndex(50))
 // console.log(list.sumOfEvenNumbers());
-// console.log(list.sumOfOddNumbers()); 
+// console.log(list.sumOfOddNumbers());
+const arr = list.covertToArray();
+console.log(arr, arr.length);
+console.log(list.doesCircleExist())
