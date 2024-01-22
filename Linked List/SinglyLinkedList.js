@@ -82,6 +82,39 @@ class LinkedList {
         this.length--;
     }
 
+    sum() {
+        let node = this.head;
+        let sum = 0;
+        while (node) {
+            sum += node.value;
+            node = node.next;
+        }
+        return sum;
+    }
+
+    sumOfEvenNumbers() {
+        let node = this.head;
+        let sum = 0;
+        while (node) {
+            if (node.value % 2 === 0) {
+                sum += node.value;
+            }
+            node = node.next;
+        }
+        return sum;
+    }
+
+    sumOfOddNumbers() {
+        let node = this.head;
+        let sum = 0;
+        while (node) {
+            if (node.value % 2 !== 0) {
+                sum += node.value;
+            }
+            node = node.next;
+        }
+        return sum;
+    }
 };
 
 const list = new LinkedList(10);
@@ -90,6 +123,12 @@ list.append(20);
 list.append(30);
 list.append(40);
 list.appendAtAnyPosition(50, 6);
-list.delete(1);
+// list.append(97);
+// list.append(45);
+// list.append(43);
+// list.delete(1);
 list.print();
-console.log(list);
+
+console.log(list.sum());
+// console.log(list.sumOfEvenNumbers());
+// console.log(list.sumOfOddNumbers()); 
