@@ -160,7 +160,7 @@ class LinkedList {
             a = a?.next;
             b = b?.next?.next;
         };
-        return a.value;
+        return a?.value;
     }
 
     doesCircleExist() {
@@ -178,18 +178,47 @@ class LinkedList {
         node = node.next;
         node.next = node.next.next;
     }
+
+    mergeTwoLists(list1, list2) {
+        // let c = list2.head;;
+        // let a = list1.head;
+        // let b = list2.head;
+        // while (a && b) {
+        //     if (a?.value === b?.value || a?.value < b?.value) {
+        //         c.next = a?.value;
+        //         a = a?.next;
+        //     } else if (a?.value > b?.value) {
+        //         c.next = b?.value;
+        //         b = b?.next;
+        //     }
+        // }
+        // c.next = b;
+        // return c.head;
+    }
 };
 
 const list = new LinkedList(10);
-list.prepend(5);
-list.append(20);
-list.append(30);
-list.append(40);
-list.appendAtAnyPosition(50, 6);
-list.append(60);
-list.append(70);
-list.append(73);
-list.append(80);
+// list.prepend(5);
+// list.append(20);
+// list.append(30);
+// list.append(40);
+// list.appendAtAnyPosition(50, 6);
+// list.append(60);
+// list.append(80);
+
+const list2 = new LinkedList(10);
+list2.append(25);
+list2.append(30);
+list2.append(35);
+list2.append(50);
+list2.append(80);
+
+const list3 = new LinkedList(10);
+list3.append(20);
+list3.append(30);
+list3.append(40);
+list3.append(60);
+list3.append(80);
 // list.delete(1);
 // list.print();
 
@@ -198,6 +227,11 @@ list.append(80);
 // console.log(list.firstAndLastOccurrenceIndex(50))
 // console.log(list.sumOfEvenNumbers());
 // console.log(list.sumOfOddNumbers());
-const arr = list.covertToArray();
-console.log(arr, arr.length);
-console.log(list.doesCircleExist())
+// console.log(list.doesCircleExist())
+const arr2 = list2.covertToArray();
+const arr3 = list3.covertToArray();
+console.log(arr2, arr2.length);
+console.log(arr3, arr3.length);
+const list4 = list.mergeTwoLists(list2, list3);
+// const arr3 = list3.covertToArray();
+console.log(list4)
