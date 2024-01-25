@@ -1,18 +1,20 @@
 /* 
     21. Merge Two Sorted Lists
     https://leetcode.com/problems/merge-two-sorted-lists/description/
-
-    1 ==> 2 ==> 4
-    1 ==> 3 ==> 4
-    1 ==> 1 ==> 2 ==> 3 ==> 4 ==> 4
 */
-var mergeTwoLists = function (list1, list2) {
-    let a = list1.head;
-    let b = list2.head;
-    while (a || b) {
-        let tempA = a.next;
-        let tempB = b.next;
-
+var mergeTwoLists = function (l1, l2) {
+    let dummy = { value: -1, next: null };
+    let c = dummy;
+    while (l1 && l1) {
+        if (l1.val > l2.val) {
+            c.next = l2;
+            l2 = l2.next;
+        } else {
+            c.next = l1;
+            l1 = l1.next;
+        }
+        c = c.next;
     }
-    return b.head;
+    c.next = l1 || l2;
+    return dummy.next;
 };

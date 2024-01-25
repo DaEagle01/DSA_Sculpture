@@ -179,59 +179,42 @@ class LinkedList {
         node.next = node.next.next;
     }
 
-    mergeTwoLists(list1, list2) {
-        // let c = list2.head;;
-        // let a = list1.head;
-        // let b = list2.head;
-        // while (a && b) {
-        //     if (a?.value === b?.value || a?.value < b?.value) {
-        //         c.next = a?.value;
-        //         a = a?.next;
-        //     } else if (a?.value > b?.value) {
-        //         c.next = b?.value;
-        //         b = b?.next;
-        //     }
-        // }
-        // c.next = b;
-        // return c.head;
+    mergeTwoSortedLists(list1, list2) {
+        let dummy = { value: -1, next: null };
+        let c = dummy;
+        let a = list1.head;
+        let b = list2.head;
+        while (a && b) {
+            if (a.value > b.value) {
+                c.next = b;
+                b = b.next;
+            } else {
+                c.next = a;
+                a = a.next;
+            }
+            c = c.next;
+        }
+        c.next = a || b;
+        return dummy.next;
     }
 };
 
 const list = new LinkedList(10);
-// list.prepend(5);
-// list.append(20);
-// list.append(30);
-// list.append(40);
-// list.appendAtAnyPosition(50, 6);
-// list.append(60);
-// list.append(80);
+list.prepend(5);
+list.append(20);
+list.append(30);
+list.append(40);
+list.appendAtAnyPosition(50, 6);
+list.append(60);
+list.append(80);
 
-const list2 = new LinkedList(10);
-list2.append(25);
-list2.append(30);
-list2.append(35);
-list2.append(50);
-list2.append(80);
-
-const list3 = new LinkedList(10);
-list3.append(20);
-list3.append(30);
-list3.append(40);
-list3.append(60);
-list3.append(80);
 // list.delete(1);
 // list.print();
-
 // console.log(list.sum());
 // console.log(list.findValue(30))
 // console.log(list.firstAndLastOccurrenceIndex(50))
 // console.log(list.sumOfEvenNumbers());
 // console.log(list.sumOfOddNumbers());
 // console.log(list.doesCircleExist())
-const arr2 = list2.covertToArray();
-const arr3 = list3.covertToArray();
-console.log(arr2, arr2.length);
-console.log(arr3, arr3.length);
-const list4 = list.mergeTwoLists(list2, list3);
-// const arr3 = list3.covertToArray();
-console.log(list4)
+// const list4 = list.mergeTwoSortedLists(list2, list3);
+console.log(list)
