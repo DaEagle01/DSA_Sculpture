@@ -197,6 +197,31 @@ class LinkedList {
         c.next = a || b;
         return dummy.next;
     }
+
+    removeNthFromEnd(head, n) {
+        if (head.next === null) return null;
+        let count = 0;
+        let count2 = 0;
+        let node = head;
+        while (node) {
+            count++;
+            node = node.next;
+        }
+        node = head;
+        if (count === n) {
+            return head.next;
+        }
+        let prevPosition = count - n;
+        while (node) {
+            count2++;
+            if (count2 === prevPosition) {
+                node.next = node.next.next;
+                break;
+            }
+            node = node.next;
+        }
+        return head
+    }
 };
 
 const list = new LinkedList(10);
@@ -215,6 +240,7 @@ list.append(80);
 // console.log(list.firstAndLastOccurrenceIndex(50))
 // console.log(list.sumOfEvenNumbers());
 // console.log(list.sumOfOddNumbers());
-// console.log(list.doesCircleExist())
+// console.log(list.doesCircleExist()) 
 // const list4 = list.mergeTwoSortedLists(list2, list3);
-console.log(list)
+// const list2 = list.removeNthFromEnd(list.head, 2);
+console.log('full list', list)
