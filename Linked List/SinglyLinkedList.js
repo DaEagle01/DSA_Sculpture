@@ -222,16 +222,35 @@ class LinkedList {
         }
         return head
     }
+
+    mergeNodes(head) {
+        let dummy = new Node(-1);
+        let node = dummy;
+        let count = 0;
+        while (head) {
+            if (head.value === 0) {
+                if (count !== 0) {
+                    node.next = new Node(count);
+                    node = node.next;
+                }
+                count = 0;
+            } else {
+                count = count + head.value;
+            }
+            head = head.next;
+        }
+        return dummy.next;
+    }
 };
 
-const list = new LinkedList(10);
-list.prepend(5);
-list.append(20);
-list.append(30);
-list.append(40);
-list.appendAtAnyPosition(50, 6);
-list.append(60);
-list.append(80);
+const list = new LinkedList(0);
+list.append(3);
+list.append(1);
+list.append(0);
+list.append(4);
+list.append(5);
+list.append(2);
+list.append(0);
 
 // list.delete(1);
 // list.print();
@@ -242,5 +261,6 @@ list.append(80);
 // console.log(list.sumOfOddNumbers());
 // console.log(list.doesCircleExist()) 
 // const list4 = list.mergeTwoSortedLists(list2, list3);
-// const list2 = list.removeNthFromEnd(list.head, 2);
-console.log('full list', list)
+// const list2 = list.removeNthFromEnd(list.head, 2); 
+// const mergeNodes = list.mergeNodes(list.head); 
+console.log(list)
