@@ -143,7 +143,7 @@ class LinkedList {
         return occurrence;
     }
 
-    covertToArray() {
+    convertToArray() {
         let array = [];
         let node = this.head;
         while (node) {
@@ -241,16 +241,30 @@ class LinkedList {
         }
         return dummy.next;
     }
+
+    deleteDuplicates(head) {
+        let node = head;
+        while (node && node.next) {
+            if (node.value === node.next?.value) {
+                node.next = node.next?.next;
+            } else {
+                node = node.next;
+            }
+        }
+        return head;
+    }
+
+    deleteNode(node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
 };
 
-const list = new LinkedList(0);
-list.append(3);
+const list = new LinkedList(1);
 list.append(1);
-list.append(0);
-list.append(4);
-list.append(5);
 list.append(2);
-list.append(0);
+list.append(3);
+list.append(3);
 
 // list.delete(1);
 // list.print();
@@ -262,5 +276,6 @@ list.append(0);
 // console.log(list.doesCircleExist()) 
 // const list4 = list.mergeTwoSortedLists(list2, list3);
 // const list2 = list.removeNthFromEnd(list.head, 2); 
-// const mergeNodes = list.mergeNodes(list.head); 
+// const mergeNodes = list.mergeNodes(list.head);  
+// const uniqueList = list.deleteDuplicates(list.head);
 console.log(list)
