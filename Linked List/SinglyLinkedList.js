@@ -255,16 +255,35 @@ class LinkedList {
     }
 
     deleteNode(node) {
-        node.val = node.next.val;
+        node.value = node.next.value;
         node.next = node.next.next;
+    }
+
+    deleteMiddle(head) {
+        if (!head.next) return null;
+        let a = head;
+        if (!a?.next?.next) {
+            a.next = null;
+            return head;
+        }
+        let b = head;
+        while (b?.next) {
+            a = a.next;
+            b = b.next.next;
+        }
+        a.value = a?.next?.value;
+        a.next = a?.next?.next;
+        return head;
     }
 };
 
 const list = new LinkedList(1);
-list.append(1);
 list.append(2);
 list.append(3);
-list.append(3);
+list.append(4);
+list.append(5);
+list.append(6);
+list.append(7);
 
 // list.delete(1);
 // list.print();
@@ -278,4 +297,7 @@ list.append(3);
 // const list2 = list.removeNthFromEnd(list.head, 2); 
 // const mergeNodes = list.mergeNodes(list.head);  
 // const uniqueList = list.deleteDuplicates(list.head);
-console.log(list)
+console.log('down', list.convertToArray().join(" --> "));
+let listWithoutMid = list.deleteMiddle(list.head);
+console.log('down', listWithoutMid)
+console.log('down', list.convertToArray())
