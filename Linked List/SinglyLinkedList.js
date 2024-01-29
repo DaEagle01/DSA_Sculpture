@@ -275,15 +275,15 @@ class LinkedList {
         a.next = a?.next?.next;
         return head;
     }
+
+    nextLargerNodes(head) {
+
+    }
 };
 
-const list = new LinkedList(1);
-list.append(2);
-list.append(3);
-list.append(4);
+const list = new LinkedList(2);
+list.append(1);
 list.append(5);
-list.append(6);
-list.append(7);
 
 // list.delete(1);
 // list.print();
@@ -297,7 +297,6 @@ list.append(7);
 // const list2 = list.removeNthFromEnd(list.head, 2); 
 // const mergeNodes = list.mergeNodes(list.head);  
 // const uniqueList = list.deleteDuplicates(list.head);
+// let listWithoutMid = list.deleteMiddle(list.head); 
 console.log('down', list.convertToArray().join(" --> "));
-let listWithoutMid = list.deleteMiddle(list.head);
-console.log('down', listWithoutMid)
 console.log('down', list.convertToArray())
