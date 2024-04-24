@@ -60,6 +60,13 @@ class LinkedList {
         }
     }
 
+    printUsingRecursion(node) {
+        if (!node) return;
+
+        console.log(node.value);
+        this.printUsingRecursion(node.next);
+    }
+
     update(value, position) {
         let node = this.findNode(position);
         node.value = value;
@@ -284,6 +291,9 @@ class LinkedList {
 const list = new LinkedList(2);
 list.append(1);
 list.append(5);
+list.append(4);
+list.append(14);
+list.append(7);
 
 // list.delete(1);
 // list.print();
@@ -299,4 +309,4 @@ list.append(5);
 // const uniqueList = list.deleteDuplicates(list.head);
 // let listWithoutMid = list.deleteMiddle(list.head); 
 console.log('down', list.convertToArray().join(" --> "));
-console.log('down', list.convertToArray())
+list.printUsingRecursion(list.head);
