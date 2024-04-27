@@ -1,16 +1,20 @@
-
-function mergeSort(arr) {
+let count = 0;
+function mergeSort(arr, side) {
+    count = count + 1;
+    console.log({ count: count, side: side, arr: arr });
     if (arr.length < 2) return arr;
 
     const mid = Math.floor(arr.length / 2)
 
     const leftArr = arr.slice(0, mid);
     const rightArr = arr.slice(mid);
-    return mergeArrays(mergeSort(leftArr), mergeSort(rightArr));
+    console.log({ left: leftArr, right: rightArr });
+    return mergeArrays(mergeSort(leftArr, 'left'), mergeSort(rightArr, 'right'));
 }
 
 function mergeArrays(leftArr, rightArr) {
-    const sortedArr = [];
+    console.log({ leftArr: leftArr, rightArr: rightArr })
+    let sortedArr = [];
     while (leftArr.length && rightArr.length) {
         if (leftArr[0] <= rightArr[0]) {
             sortedArr.push(leftArr.shift())
@@ -18,7 +22,9 @@ function mergeArrays(leftArr, rightArr) {
             sortedArr.push(rightArr.shift())
         }
     }
-    return [...sortedArr, ...leftArr, ...rightArr];
+    const newArr = [...sortedArr, ...leftArr, ...rightArr];
+    console.log({ newArr: newArr });
+    return newArr
 }
 
 let arr = [80, 10, 30, 40, 90, 50, 20]
