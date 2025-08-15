@@ -3,7 +3,7 @@
     https://leetcode.com/problems/reverse-string/description/
 */
 
-const reverseString = (arr) => {
+const reverseString = (arr: string[]): string[] => {
     let start = 0;
     let end = arr.length - 1;
     while (start <= end) {
