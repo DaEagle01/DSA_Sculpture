@@ -42,6 +42,6 @@
     "skipLibCheck": true,
     "allowJs": true,
   },
-  "include": ["src"],
+  "include": ["src/javascript-typescript"],
   "exclude": ["node_modules", "dist"]
 }
