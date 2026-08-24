@@ -5,3 +5,7 @@ __pycache__/
 *.pyc
 venv/
 .venv/
+
+# personal logs
+/notes/MISTAKES.md
+/notes/PROGRESS.md

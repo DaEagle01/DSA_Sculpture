@@ -2,6 +2,10 @@
 
 Data structures and algorithms practice, split by language: JavaScript/TypeScript and Python. Mostly LeetCode problems, plus a few from-scratch implementations (linked lists, sorting, etc).
 
+## Notes
+
+Study notes live in [notes/](./notes/): a Big O reference, recurring problem-solving patterns, code templates, a gotchas log, and a glossary.
+
 ## Structure
 
 ```
