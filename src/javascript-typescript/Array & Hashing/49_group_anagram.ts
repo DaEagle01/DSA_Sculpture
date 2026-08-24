@@ -1,22 +1,13 @@
-// undone
-function groupAnagrams(strs: string[]): string[][] {
-  if (strs.length < 1) return [];
-  if (strs.length === 1) return [strs];
-
-  const result: string[] = [];
-  const freqStore = new Array(strs.length).fill(new Array(26).fill(0));
-
-  for (let i = 0; i < strs.length; i++) {
-    const freq = new Array(26).fill(0);
-    for (let j = 0; j < strs[i].length; j++) {
-      freq[strs[i].charCodeAt(j) - 97] += 1;
-    }
-    freqStore[i] = freq;
+function groupAnagrams(words: string[]) {
+  const map = new Map();
+  for (let word of words) {
+    const key = word.split('').sort().join('');
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(word);
   }
-  console.log(freqStore);
-
-  return [["a"]];
+  return map.values();
 }
+
 
 // console.log(groupAnagrams(["eat", "tea"]));
 console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));

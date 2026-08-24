@@ -1,4 +1,4 @@
-// function recursion(n) {
+/* // function recursion(n) {
 //     if (n > 10) return;
 //     console.log(n)
 //     recursion(n + 1)
@@ -47,3 +47,36 @@ const word = 'aabaa';
 
 
 // linked list traverse
+ */
+
+function sumNested(obj) {
+  let sum = 0;
+  console.log(sum, obj);
+  for (let key in obj) {
+    if (typeof obj[key] === "object") sum += sumNested(obj[key]);
+    else sum += obj[key];
+  }
+  return sum;
+}
+
+// Example nested data to test
+const testData = {
+  a: 10,
+  b: {
+    c: 5,
+    d: 3,
+    e: {
+      f: 2,
+      g: 1,
+    },
+  },
+  h: 7,
+  i: {
+    j: 8,
+    k: {
+      l: 4,
+    },
+  },
+};
+
+console.log(sumNested(testData)); // Should output 40
