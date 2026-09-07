@@ -1,150 +1,164 @@
-class Node:
-    def __init__(self, value, next=None):
-        self.value = value
-        self.next = next
+from typing import Optional
 
+class Node:
+    def __init__(self, value) -> None:
+        self.value = value
+        self.next: Optional['Node'] = None
 
 class LinkedList:
-    def __init__(self, value):
-        node = Node(value)
-        self.head = node
-        self.tail = node
+    def __init__(self, value) -> None:
+        new_node = Node(value)
+        self.head = new_node
+        self.tail = new_node
         self.length = 1
 
     def append(self, value):
-        node = Node(value)
-        self.tail.next = node
-        self.tail = node
+        new_node = Node(value)
+        if self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
         self.length += 1
+        return True
 
     def prepend(self, value):
-        node = Node(value)
-        node.next = self.head
-        self.head = node
-        self.length += 1
-
-    def insert_at(self, value, position):
-        if position == 1:
-            self.prepend(value)
-            return
-        if position == self.length + 1:
-            self.append(value)
-            return
-        node = Node(value)
-        prev_node = self.find_node(position - 1)
-        node.next = prev_node.next
-        prev_node.next = node
-        self.length += 1
-
-    def find_node(self, position):
-        node = self.head
-        count = 1
-        while count < position:
-            node = node.next
-            count += 1
-        return node
-
-    def delete(self, position):
-        if position == 1:
-            self.head = self.head.next
-        elif position == self.length:
-            prev_node = self.find_node(position - 1)
-            prev_node.next = None
-        elif 1 < position < self.length:
-            prev_node = self.find_node(position - 1)
-            prev_node.next = prev_node.next.next
+        new_node = Node(value)
+        if(self.head is None):
+            self.head = new_node
+            self.tail = new_node
         else:
-            raise IndexError("Invalid position")
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return True
+
+    def insert(self, index, value):
+        # 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+        if index < 0 or index > self.length:
+            return False
+        elif index == 0:
+            return self.prepend(value)
+        elif index == self.length:
+            return self.append(value)
+        else:
+            new_node = Node(value)
+            temp = self.get_node(index - 1)
+            assert temp is not None
+            new_node.next = temp.next
+            temp.next = new_node
+            self.length += 1
+            return True
+
+    def pop(self):
+        if self.head is None:
+            return None
+        elif self.head == self.tail:
+            popped_value = self.head.value
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return popped_value
+        else:
+            temp = self.head
+            prev = self.head
+            while temp.next is not None:
+                prev = temp
+                temp = temp.next
+            self.tail = prev
+            self.tail.next = None
+            self.length -= 1
+            return temp.value
+
+    def pop_first(self):
+        if self.head is None:
+            return None
+        elif self.head == self.tail:
+            temp = self.head
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return temp.value
+        else:
+            temp = self.head
+            self.head = temp.next
+            temp.next = None
+            self.length -= 1
+            return temp.value
+
+    def print_list(self):
+        temp = self.head
+        while temp is not None:
+            print(temp.value)
+            temp = temp.next
+        print(f'Total count: {self.length}')
+
+    def get_node(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        else:
+            temp = self.head
+            for _ in range(index):
+                assert temp is not None
+                temp = temp.next
+            return temp
+
+    def get(self, index):
+        node = self.get_node(index)
+        if node is None:
+            return None
+        else:
+            return node.value
+
+    def set_value(self, index, value):
+        node = self.get_node(index)
+        if node is None:
+            return False
+        else:
+            node.value = value
+            return True
+
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return False
+        if index == 0:
+            return self.pop_first()
+        prev = self.head
+        for _ in range(index - 1):
+            assert prev is not None
+            prev = prev.next
+        assert prev is not None
+        temp = prev.next
+        assert temp is not None
+        prev.next = temp.next
+        if temp == self.tail:
+            self.tail = prev
         self.length -= 1
+        return True
 
-    def sum(self):
-        total = 0
-        node = self.head
-        while node:
-            total += node.value
-            node = node.next
-        return total
+    def reverse(self):
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+        after = temp.next
+        before = None
 
-    def sum_of_even_numbers(self):
-        total = 0
-        node = self.head
-        while node:
-            if node.value % 2 == 0:
-                total += node.value
-            node = node.next
-        return total
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
 
-    def sum_of_odd_numbers(self):
-        total = 0
-        node = self.head
-        while node:
-            if node.value % 2 != 0:
-                total += node.value
-            node = node.next
-        return total
+        return True
 
-    def find_value(self, value):
-        node = self.head
-        while node:
-            if node.value == value:
-                return True
-            node = node.next
-        return False
-
-    def find_mid_value(self):
-        slow = fast = self.head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        return slow.value if slow else None
-
-    def has_cycle(self):
-        slow = fast = self.head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            if slow is fast:
-                return True
-        return False
-
-    def to_list(self):
-        result = []
-        node = self.head
-        while node:
-            result.append(node.value)
-            node = node.next
-        return result
-
-    def print(self):
-        print(" -> ".join(str(v) for v in self.to_list()))
-
-
-if __name__ == "__main__":
-    ll = LinkedList(2)
-    ll.append(1)
-    ll.append(5)
-    ll.append(4)
-    ll.append(14)
-    ll.append(7)
-
-    assert ll.to_list() == [2, 1, 5, 4, 14, 7]
-
-    ll.prepend(0)
-    assert ll.to_list() == [0, 2, 1, 5, 4, 14, 7]
-
-    ll.insert_at(99, 4)
-    assert ll.to_list() == [0, 2, 1, 99, 5, 4, 14, 7]
-
-    ll.delete(4)
-    assert ll.to_list() == [0, 2, 1, 5, 4, 14, 7]
-
-    assert ll.sum() == 33
-    assert ll.sum_of_even_numbers() == 20
-    assert ll.sum_of_odd_numbers() == 13
-    assert ll.find_value(14) is True
-    assert ll.find_value(100) is False
-    assert ll.find_mid_value() == 5
-    assert ll.has_cycle() is False
-
-    ll.print()
-    print("All singly_linked_list assertions passed.")
+# 10 -> 20 -> 30 -> 40
+my_linked_list = LinkedList(10)
+my_linked_list.append(20)
+my_linked_list.append(30)
+my_linked_list.append(40)
+print('-------------------------------------')
+# my_linked_list.print_list()
+my_linked_list.reverse()
+print('-------------------------------------')
+my_linked_list.print_list()
